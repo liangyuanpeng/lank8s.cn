@@ -1,0 +1,19 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+spring:
+#  autoconfigure:
+#    exclude: org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration
+  data:
+    redis:
+      enabled: false
+      repositories:
+        enabled: false
+      host: localhost
+      port: 6666
+      password:
+      usePipeline: true
+      usePipelineBatchThreads: 100

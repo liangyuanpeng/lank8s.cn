@@ -1,0 +1,38 @@
+name: compile
+
+on: 
+  push:
+    branches: [ main ]
+    paths:
+      - java/springboot/**
+  pull_request:
+    paths:
+      - java/springboot/**
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  compile:
+    strategy:
+      matrix:
+        java-version:
+          - 17
+          - 21
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up java
+      uses: actions/setup-java@v3
+      with:
+        java-version: "${{ matrix.java-version }}"
+        distribution: 'temurin'
+        cache: 'maven'
+
+    - name: compile and test
+      run: |
+        echo "compile and test"
+        cd java/springboot
+        mvn test
+
