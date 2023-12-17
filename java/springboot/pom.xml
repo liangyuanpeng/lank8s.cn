@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>3.2.0</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+	<groupId>cn.lank8s</groupId>
+	<artifactId>springboot</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>springboot</name>
+	<description>lank8s.cn</description>
+	<properties>
+		<spring-boot.version>3.0.1</spring-boot.version>
+		<java.version>17</java.version>
+		<jib.build.type>buildTar</jib.build.type>
+		<docker.auth.username>123</docker.auth.username>
+		<docker.auth.password>123</docker.auth.password>
+		<docker.image.version>${version}</docker.image.version>
+		<jib-maven-plugin.version>3.2.1</jib-maven-plugin.version>
+		<docker.image.name>registry.cn-hongkong.aliyuncs.com/kafeidou/lank8scn</docker.image.name>
+		<docker.image.from>registry.cn-hongkong.aliyuncs.com/smartoilets/open-liberty:22.0.0.10-kernel-slim-java17-openj9-ubi</docker.image.from>
+		<guava.version>31.1-jre</guava.version>
+		<jwt.version>0.10.5</jwt.version>
+		<commons.lang3.version>3.7</commons.lang3.version>
+		<kubernetes-client.version>17.0.0</kubernetes-client.version>
+		<protobuf.version>3.19.6</protobuf.version>
+		<protobuf-maven-plugin.version>0.5.0</protobuf-maven-plugin.version>
+		<protoc3.version>3.16.1</protoc3.version>
+		<grpc.version>1.17.1</grpc.version>
+		<!--        <os.detected.classifier>linux-x86_64</os.detected.classifier>-->
+		<!--        <os.detected.classifier>osx-x86_64</os.detected.classifier>-->
+		<!--Windows-->
+		        <os.detected.classifier>windows-x86_64</os.detected.classifier>
+	</properties>
+	<dependencies>
+
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-pool2</artifactId>
+			<version>2.11.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.rocksdb</groupId>
+			<artifactId>rocksdbjni</artifactId>
+			<version>7.0.4</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-redis</artifactId>
+		</dependency>
+		
+		<dependency>
+			<groupId>io.kubernetes</groupId>
+			<artifactId>client-java</artifactId>
+			<version>${kubernetes-client.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>${commons.lang3.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+<!--		<dependency>-->
+<!--			<groupId>org.springframework.boot</groupId>-->
+<!--			<artifactId>spring-boot-devtools</artifactId>-->
+<!--			<scope>runtime</scope>-->
+<!--			<optional>true</optional>-->
+<!--		</dependency>-->
+		<dependency>
+			<groupId>io.micrometer</groupId>
+			<artifactId>micrometer-registry-prometheus</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-maven-plugin -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-maven-plugin</artifactId>
+			<version>${spring-boot.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-buildpack-platform -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-buildpack-platform</artifactId>
+			<version>${spring-boot.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.google.cloud.tools/jib-maven-plugin -->
+		<dependency>
+			<groupId>com.google.cloud.tools</groupId>
+			<artifactId>jib-maven-plugin</artifactId>
+			<version>${jib-maven-plugin.version}</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>${guava.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-api</artifactId>
+			<version>${jwt.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-impl</artifactId>
+			<version>${jwt.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-jackson</artifactId>
+			<version>${jwt.version}</version>
+			<scope>runtime</scope>
+		</dependency>
+
+	</dependencies>
+
+	<profiles>
+		<profile>
+			<id>native</id>
+			<build>
+				<pluginManagement>
+					<plugins>
+						<plugin>
+							<groupId>org.graalvm.buildtools</groupId>
+							<artifactId>native-maven-plugin</artifactId>
+							<executions>
+								<execution>
+									<id>build-image</id>
+									<goals>
+										<goal>compile-no-fork</goal>
+									</goals>
+								</execution>
+							</executions>
+						</plugin>
+					</plugins>
+				</pluginManagement>
+			</build>
+		</profile>
+	</profiles>
+
+	<build>
+
+		<extensions>
+			<extension>
+				<groupId>kr.motd.maven</groupId>
+				<artifactId>os-maven-plugin</artifactId>
+				<version>1.7.0</version>
+			</extension>
+		</extensions>
+
+		<plugins>
+
+			<plugin>
+				<groupId>com.google.cloud.tools</groupId>
+				<artifactId>jib-maven-plugin</artifactId>
+				<version>${jib-maven-plugin.version}</version>
+				<executions>
+<!--					<execution>-->
+<!--						<phase>package</phase>-->
+<!--						<goals>-->
+<!--							<goal>${jib.build.type}</goal>-->
+<!--						</goals>-->
+<!--					</execution>-->
+				</executions>
+				<configuration>
+					<from>
+						<image>
+							${docker.image.from}
+						</image>
+					</from>
+					<to>
+						<image>${docker.image.name}:${project.artifactId}-${docker.image.version}</image>
+						<auth>
+							<username>${docker.auth.username}</username>
+							<password>${docker.auth.password}</password>
+						</auth>
+					</to>
+					<container>
+						<!-- <args>
+                            <arg>mkdir /jvm</arg>
+                        </args> -->
+						<mainClass>cn.lank8s.springboot.Application</mainClass>
+						<jvmFlags>
+							<jvmFlag>-XX:ErrorFile=/usr/local/lank8scn/logs/springboot/hs_err.log</jvmFlag>
+							<jvmFlag>-XX:HeapDumpPath=/usr/local/lank8scn/dumps/springboot</jvmFlag>
+							<jvmFlag>-XX:+DisableExplicitGC</jvmFlag>
+							
+							<jvmFlag>-XX:MaxMetaspaceSize=256M</jvmFlag>
+							<jvmFlag>-XX:MetaspaceSize=256M</jvmFlag>
+							<jvmFlag>-XX:+UseG1GC</jvmFlag>
+							<!--每次年轻代垃圾回收的最长时间(最大暂停时间)-->
+							<jvmFlag>-XX:MaxGCPauseMillis=100</jvmFlag>
+							<jvmFlag>-XX:+ParallelRefProcEnabled</jvmFlag>
+
+							<jvmFlag>-XX:+UnlockExperimentalVMOptions</jvmFlag>
+
+
+							<jvmFlag>-XX:+HeapDumpOnOutOfMemoryError</jvmFlag>
+							<!--启动时打印JVM参数-->
+							<jvmFlag>-XX:+PrintCommandLineFlags</jvmFlag>
+						</jvmFlags>
+						<environment>
+							<!--添加时区-->
+							<TZ>Asia/Shanghai</TZ>
+						</environment>
+						<volumes>
+							<volume>/smartjvm</volume>
+						</volumes>
+						<!-- <labels>
+                            <Tz>Asia/Shanghai</Tz>
+                        </labels> -->
+						<appRoot>/usr/local/tomcat/webapps/ROOT</appRoot>
+
+						<!--使用当前时间-->
+						<!--                        <useCurrentTimestamp>true</useCurrentTimestamp>-->
+						<creationTime>USE_CURRENT_TIMESTAMP</creationTime>
+						<ports>
+							<port>8080</port>
+						</ports>
+					</container>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.graalvm.buildtools</groupId>
+				<artifactId>native-maven-plugin</artifactId>
+				<version>0.9.19</version>
+<!--				<executions>-->
+<!--					<execution>-->
+<!--						<id>native</id>-->
+<!--						<phase>package</phase>-->
+<!--						<goals>-->
+<!--							<goal>build</goal>-->
+<!--						</goals>-->
+<!--					</execution>-->
+<!--				</executions>-->
+			</plugin>
+			<plugin>
+				<!-- https://docs.spring.io/spring-boot/docs/current/maven-plugin/reference/htmlsingle/#build-image.examples.docker -->
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>build-image</id>
+						<goals>
+							<goal>build-image-no-fork</goal>
+						</goals>
+					</execution>
+				</executions>
+
+				<configuration>
+					<image>
+						<env>
+							<BP_JVM_VERSION>17</BP_JVM_VERSION>
+						</env>
+						<name>${docker.image.name}:${project.artifactId}-${docker.image.version}</name>
+						<publish>true</publish>
+					</image>
+					<docker>
+						<publishRegistry>
+							<username>test</username>
+							<password>test</password>
+						</publishRegistry>
+					</docker>
+					<excludes>
+						<exclude>
+							<groupId>org.projectlombok</groupId>
+							<artifactId>lombok</artifactId>
+						</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
