@@ -25,7 +25,7 @@
 		<docker.image.from>registry.cn-hongkong.aliyuncs.com/smartoilets/open-liberty:22.0.0.10-kernel-slim-java17-openj9-ubi</docker.image.from>
 		<guava.version>32.0.0-jre</guava.version>
 		<jwt.version>0.10.5</jwt.version>
-		<commons.lang3.version>3.7</commons.lang3.version>
+		<commons.lang3.version>3.14.0</commons.lang3.version>
 		<kubernetes-client.version>17.0.0</kubernetes-client.version>
 		<protobuf.version>3.19.6</protobuf.version>
 		<protobuf-maven-plugin.version>0.5.0</protobuf-maven-plugin.version>
