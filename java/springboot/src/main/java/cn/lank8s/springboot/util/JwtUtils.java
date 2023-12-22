@@ -78,7 +78,7 @@ public class JwtUtils {
     public Claims getTokenClaims(String token) {
         try {
             return Jwts.parser()
-                    .setSigningKey(secret).parseClaimsJws(token).getBody();
+                    .setSigningKey(secret).build().parseClaimsJws(token).getBody();
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -94,7 +94,7 @@ public class JwtUtils {
     public Object getTokenClaim(String token, String claim) {
         try {
             Claims claims = Jwts.parser()
-                    .setSigningKey(secret).parseClaimsJws(token).getBody();
+                    .setSigningKey(secret).build().parseClaimsJws(token).getBody();
             return claims.get(claim);
         } catch (Exception e) {
             log.error("JwtUtils getTokenClaim error",e);
@@ -104,7 +104,7 @@ public class JwtUtils {
 
     public Optional<String> getSubFromToken(String token) {
         try {
-            Jws<Claims> claimsJws = Jwts.parser().setSigningKey(secret).parseClaimsJws(token);
+            Jws<Claims> claimsJws = Jwts.parser().setSigningKey(secret).build().parseClaimsJws(token);
             return Optional.ofNullable(claimsJws.getBody().getSubject());
         } catch (Exception e) {
             return Optional.empty();
@@ -113,7 +113,7 @@ public class JwtUtils {
 
     public Object getClaimObjFromToken(String claim, String token) {
         try {
-            Jws<Claims> claimsJws = Jwts.parser().setSigningKey(secret).parseClaimsJws(token);
+            Jws<Claims> claimsJws = Jwts.parser().setSigningKey(secret).build().parseClaimsJws(token);
             return claimsJws.getBody().get(claim);
         } catch (Exception e) {
             log.error("parse.token.fail:{}|{}", claim, token);
@@ -123,7 +123,7 @@ public class JwtUtils {
 
     public String getClaimFromToken(String claim, String token) {
         try {
-            Jws<Claims> claimsJws = Jwts.parser().setSigningKey(secret).parseClaimsJws(token);
+            Jws<Claims> claimsJws = Jwts.parser().setSigningKey(secret).build().parseClaimsJws(token);
             Object optional = Optional.ofNullable(claimsJws.getBody().get(claim)).orElseGet(() -> Optional.empty());
             if (optional != null) {
                 return optional.toString();
