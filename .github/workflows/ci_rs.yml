@@ -1,0 +1,39 @@
+name: compile-rs
+
+on: 
+  push:
+    branches: [ main ]
+    paths:
+      - staging/lank8s.cn-rs/**
+  pull_request:
+    paths:
+      - staging/lank8s.cn-rs/**
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up java
+      uses: actions/setup-java@v3
+      with:
+        java-version: "${{ matrix.java-version }}"
+        distribution: 'temurin'
+        cache: 'maven'
+
+    - name: Audit
+      run: cargo audit
+
+    - name: Format
+      run: cargo fmt --all -- --check
+
+    - name: Sort crates
+      run: cargo sort --check --workspace
+
+
+    - name: Clippy
+      run: cargo clippy  --all-targets --all-features -- -D warnings
