@@ -1,0 +1,41 @@
+name: compile-rs
+
+on: 
+  push:
+    branches: [ main ]
+    paths:
+      - staging/lank8s.cn-rs/**
+  pull_request:
+    paths:
+      - staging/lank8s.cn-rs/**
+
+env:
+  CI_RUST_TOOLCHAIN: 1.70.0
+  
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  compile:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install Toolchain
+      uses: dtolnay/rust-toolchain@v1
+      with:
+        toolchain: ${{ env.CI_RUST_TOOLCHAIN }}
+
+    - name: Audit
+      run: cargo audit
+
+    - name: Format
+      run: cargo fmt --all -- --check
+
+    - name: Sort crates
+      run: cargo sort --check --workspace
+
+
+    - name: Clippy
+      run: cargo clippy  --all-targets --all-features -- -D warnings
