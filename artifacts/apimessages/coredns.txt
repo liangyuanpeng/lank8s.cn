@@ -1,0 +1,9 @@
+ coredns 1.7.1 以上由于镜像仓库从 registry.k8s.io/coredns 修改为了 registry.k8s.io/coredns/coredns,
+ 因此如果你使用 kubeadm 的话那么你需要在配置文件中配置 dns 的镜像仓库为 registry.lank8s.cn/coredns(完整镜像为 registry.lank8s.cn/coredns/coredns:v1.8.0 ),
+ 配置格式应该如下: 
+
+dns:
+    imageRepository: registry.lank8s.cn/coredns
+
+  温馨提示新版本镜像的tag都带有v前缀.
+  可以在这里查看更多信息: https://liangyuanpeng.com/post/kubeadm-config-note-long-term/
