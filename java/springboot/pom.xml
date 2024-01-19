@@ -39,6 +39,12 @@
 	<dependencies>
 
 		<dependency>
+			<groupId>com.squareup.okhttp3</groupId>
+			<artifactId>okhttp</artifactId>
+			<version>4.11.0</version>
+		</dependency>
+
+		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-pool2</artifactId>
 			<version>2.12.0</version>
@@ -169,6 +175,59 @@
 				</pluginManagement>
 			</build>
 		</profile>
+
+		<profile>
+			<id>dev</id>
+			<properties>
+				<profileActive>dev</profileActive>
+				<docker.image.version>${version}</docker.image.version>
+			</properties>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+		</profile>
+
+		<profile>
+			<id>docker</id>
+			<properties>
+				<docker.image.version>${version}</docker.image.version>
+				<profileActive>docker</profileActive>
+			</properties>
+		</profile>
+		<profile>
+			<id>temurin17</id>
+			<properties>
+				<docker.image.version>${version}-temurin17</docker.image.version>
+				<profileActive>docker</profileActive>
+				<docker.image.from>registry.cn-hongkong.aliyuncs.com/smartoilets/eclipse-temurin:17.0.5_8-jre</docker.image.from>
+			</properties>
+		</profile>
+		<profile>
+			<id>temurin21</id>
+			<properties>
+				<docker.image.version>${version}-temurin21</docker.image.version>
+				<profileActive>docker</profileActive>
+				<docker.image.from>eclipse-temurin:21.0.1_12-jdk</docker.image.from>
+			</properties>
+		</profile>
+
+		<profile>
+			<id>zulu17-crac</id>
+			<properties>
+				<docker.image.version>${version}-zulu17-crac</docker.image.version>
+				<profileActive>docker</profileActive>
+				<docker.image.from>azul/zulu-openjdk:17.0.9-17.46-jdk-crac</docker.image.from>
+			</properties>
+		</profile>
+		<profile>
+			<id>zulu21-crac</id>
+			<properties>
+				<docker.image.version>${version}-zulu21-crac</docker.image.version>
+				<profileActive>docker</profileActive>
+				<docker.image.from>azul/zulu-openjdk:21.0.1-21.30-jdk-crac</docker.image.from>
+			</properties>
+		</profile>
+
 	</profiles>
 
 	<build>
