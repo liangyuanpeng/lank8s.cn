@@ -14,7 +14,7 @@
 	<name>springboot</name>
 	<description>lank8s.cn</description>
 	<properties>
-		<spring-boot.version>3.2.1</spring-boot.version>
+		<spring-boot.version>3.2.2</spring-boot.version>
 		<java.version>17</java.version>
 		<jib.build.type>buildTar</jib.build.type>
 		<docker.auth.username>123</docker.auth.username>
