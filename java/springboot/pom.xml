@@ -26,7 +26,7 @@
 		<guava.version>33.0.0-jre</guava.version>
 		<jwt.version>0.12.5</jwt.version>
 		<commons.lang3.version>3.14.0</commons.lang3.version>
-		<kubernetes-client.version>17.0.0</kubernetes-client.version>
+		<kubernetes-client.version>20.0.0-legacy</kubernetes-client.version>
 		<protobuf.version>3.19.6</protobuf.version>
 		<protobuf-maven-plugin.version>0.5.0</protobuf-maven-plugin.version>
 		<protoc3.version>3.16.1</protoc3.version>
