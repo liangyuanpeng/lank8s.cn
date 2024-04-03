@@ -20,7 +20,7 @@
 		<docker.auth.username>123</docker.auth.username>
 		<docker.auth.password>123</docker.auth.password>
 		<docker.image.version>${version}</docker.image.version>
-		<jib-maven-plugin.version>3.4.1</jib-maven-plugin.version>
+		<jib-maven-plugin.version>3.4.2</jib-maven-plugin.version>
 		<docker.image.name>registry.cn-hongkong.aliyuncs.com/kafeidou/lank8scn</docker.image.name>
 		<docker.image.from>registry.cn-hongkong.aliyuncs.com/smartoilets/open-liberty:22.0.0.10-kernel-slim-java17-openj9-ubi</docker.image.from>
 		<guava.version>33.1.0-jre</guava.version>
