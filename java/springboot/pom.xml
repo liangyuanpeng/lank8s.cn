@@ -23,7 +23,7 @@
 		<jib-maven-plugin.version>3.4.3</jib-maven-plugin.version>
 		<docker.image.name>registry.cn-hongkong.aliyuncs.com/kafeidou/lank8scn</docker.image.name>
 		<docker.image.from>registry.cn-hongkong.aliyuncs.com/smartoilets/open-liberty:22.0.0.10-kernel-slim-java17-openj9-ubi</docker.image.from>
-		<guava.version>33.3.0-jre</guava.version>
+		<guava.version>33.3.1-jre</guava.version>
 		<jwt.version>0.12.6</jwt.version>
 		<commons.lang3.version>3.17.0</commons.lang3.version>
 		<kubernetes-client.version>17.0.0</kubernetes-client.version>
